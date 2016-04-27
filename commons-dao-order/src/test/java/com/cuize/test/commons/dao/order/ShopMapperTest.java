@@ -1,9 +1,9 @@
-package com.cuize.test.task.dao.order;
+package com.cuize.test.commons.dao.order;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.cuize.commons.dao.product.mapper.ShopMapper;
+import com.cuize.commons.dao.order.mapper.OrderMapper;
 
 /**
  * @author Ralph
@@ -14,7 +14,7 @@ public class ShopMapperTest extends DaoBaseAppTest{
 //	private static final Logger logger = LoggerFactory.getLogger(InsuranceOrderMapperTest.class);
 
 	@Autowired
-	private ShopMapper shopMapper;
+	private OrderMapper shopMapper;
 	/*
 	@Test
 	public void selectByExample(){

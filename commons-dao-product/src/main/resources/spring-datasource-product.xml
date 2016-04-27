@@ -32,17 +32,17 @@
 
 	<bean id="productSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="productDataSource" />
-		<property name="mapperLocations" value="classpath*:com/cuize/task/dao/product/mapper/*.xml" />
-		<property name="typeAliasesPackage" value="com.cuize.task.dao.product.domain" />
+		<property name="mapperLocations" value="classpath*:com/cuize/commons/dao/product/mapper/*.xml" />
+		<property name="typeAliasesPackage" value="com.cuize.commons.dao.product.domain" />
 		<property name="configLocation" value="classpath:mybatis-config-product.xml"/>
 		<property name="plugins">  
-        	<bean class="com.cuize.task.dao.product.domain.PaginationInterceptor">  
+        	<bean class="com.cuize.commons.dao.product.domain.PaginationInterceptor">  
        		</bean>  
     	</property>  
 	</bean>
 	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" id="productMapperScanner">
-		<property name="basePackage" value="com.cuize.task.dao.product.mapper" />
+		<property name="basePackage" value="com.cuize.commons.dao.product.mapper" />
 		<property name="sqlSessionFactoryBeanName" value="productSqlSessionFactory"/> 
 	</bean>
 	
@@ -52,5 +52,5 @@
 	</bean>
 	
 	<context:property-placeholder location="classpath*:/conf/jdbc-product.properties" ignore-unresolvable="true" properties-ref="productJdbc" local-override="true" />
-	<util:properties id="productJdbc" location="file:/opt/conf/task/jdbc-product.properties" ignore-resource-not-found="true"/>
+	<util:properties id="productJdbc" location="file:/opt/conf/commons/jdbc-product.properties" ignore-resource-not-found="true"/>
 </beans>
