@@ -48,7 +48,6 @@
 	
 	<bean id="productTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="productDataSource" />
-		<qualifier value="product" /> 
 	</bean>
 	
 	<context:property-placeholder location="classpath*:/conf/jdbc-product.properties" ignore-unresolvable="true" properties-ref="productJdbc" local-override="true" />

@@ -47,7 +47,6 @@
 	
 	<bean id="orderTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="orderDataSource" />
-		<qualifier value="order" /> 
 	</bean>
 	
 	<context:property-placeholder location="classpath*:/conf/jdbc-order.properties" ignore-unresolvable="true" properties-ref="orderJdbc" local-override="true" />
