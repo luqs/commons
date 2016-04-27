@@ -1,4 +1,4 @@
-package com.cuize.test.task.dao.order;
+package com.cuize.test.commons.dao.activity;
 
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

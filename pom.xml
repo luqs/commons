@@ -13,6 +13,7 @@
 	<modules>
 		<module>commons-dao-order</module>
 		<module>commons-dao-product</module>
+		<module>commons-dao-activity</module>
 		<module>commons-utils</module>
 	</modules>
 

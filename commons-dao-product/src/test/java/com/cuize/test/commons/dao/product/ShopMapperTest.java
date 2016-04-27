@@ -1,4 +1,4 @@
-package com.cuize.test.task.dao.order;
+package com.cuize.test.commons.dao.product;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
