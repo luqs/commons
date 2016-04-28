@@ -10,6 +10,10 @@ public class ServiceException extends Exception {
 		this.userDefinedReason = userDefinedReason;
 	}
 
+	public ServiceException(String message) {
+		super(message);
+	}
+
 	public ServiceException(Throwable cause) {
 		super(cause);
 	}

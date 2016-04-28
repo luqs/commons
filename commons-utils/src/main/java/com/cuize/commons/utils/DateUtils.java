@@ -1,5 +1,4 @@
 package com.cuize.commons.utils;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -517,6 +516,19 @@ public class DateUtils {
 			logger.error("getNowDateString error", ex);
 		}
 		return null;
+	}
+	
+	/**
+	 * 获取指定日期之前或之后几天的日期
+	 * @param date
+	 * @param count
+	 * @return
+	 */
+	public static Date getThedayBeforeOrAfterSomeDay(Date date,int count){
+		Calendar calendar=Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.DATE, count);
+        return calendar.getTime();
 	}
 
 }

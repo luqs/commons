@@ -21,5 +21,13 @@ public interface Constant {
 	public static final Integer TICKET_DAYTYPE_NOTDISPLAY = 0;//不显示
 	public static final Integer TICKET_DAYTYPE_PACK = 3;//套票（打包票）
 	
+	public static final Integer PRODUCT_PACKTYPE_NOT = 0;//非打包产品的打包类型
 	public static final Integer PRODUCT_PACKTYPE_HUANQI = 1;//打包产品的打包类型
+	
+	public static final Integer PRODUCT_STATUS_SALES = 1;//上架
+	public static final Integer PRODUCT_STATUS_ONLYPACK = 2;//只在打包产品中售卖
+	public static final Integer PRODUCT_STATUS_TEMP = 8;//临时票（体验票）
+	public static final Integer PRODUCT_STATUS_DELETE = 9;//只在打包产品中售卖
+	
+	
 }

@@ -365,6 +365,23 @@
 			<artifactId>jodd-http</artifactId>
 			<version>3.6.7</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>3.2.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>jdom</groupId>
+			<artifactId>jdom</artifactId>
+			<version>1.0</version>
+		</dependency>
+		<dependency>
+       		<groupId>com.thoughtworks.xstream</groupId>
+       		<artifactId>xstream</artifactId>
+       		<version>1.4.7</version>
+   		</dependency>
 	</dependencies>
 
 	<build>
