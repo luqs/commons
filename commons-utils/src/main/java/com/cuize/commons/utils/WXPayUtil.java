@@ -42,7 +42,7 @@ public class WXPayUtil {
 		return sb.toString();
 	}
 
-	public static String createSign(String characterEncoding,
+	public static String createSign(String characterEncoding,String apiKey,
 			SortedMap<String, String> parameters) {
 		StringBuffer sb = new StringBuffer();
 		Set<Map.Entry<String, String>> es = parameters.entrySet();
@@ -56,7 +56,7 @@ public class WXPayUtil {
 				sb.append(k + "=" + v + "&");
 			}
 		}
-		sb.append("key=aDdfoi123D093Ilfi900azcjholoaa2Z");
+		sb.append("key="+apiKey);
 		String sign = MD5Encode(sb.toString(), characterEncoding).toUpperCase();
 		return sign;
 	}
