@@ -13,8 +13,10 @@ public interface Constant {
 	
 	public static final Integer THIRD_SYSTYPE_HIYO = 0;//嗨摇
 	public static final Integer THIRD_SYSTYPE_HUANQI = 1;//环企
-	public static final Integer THIRD_SYSTYPE_HUANQI_PAYFIRST = 2;//环企先支付
 	public static final Integer THIRD_SYSTYPE_SHENDA = 3;//深大
+	
+	public static final Integer FIRST_TICKET = 0;//先出票
+	public static final Integer FIRST_PAY = 1;//先支付
 	
 	public static final Integer TICKET_DAYTYPE_TODAY = 1;//当日票
 	public static final Integer TICKET_DAYTYPE_OTHERDAY = 2;//预约票
