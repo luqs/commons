@@ -126,4 +126,14 @@ public class StringUtil {
 	private static byte charToBytePos(char c) {   
 		return (byte) "0123456789ABCDEF".indexOf(c);
 	}
+	
+	/**
+	 * 如果为空则返回默认字符
+	 * @param str
+	 * @param defaultStr
+	 * @return
+	 */
+	public static String defaultIfEmpty(final Object str, final String defaultStr){
+		return (null == str || "".equals(str)) ? defaultStr : str.toString();
+	}
 }

@@ -29,5 +29,6 @@ public interface Constant {
 	public static final Integer PRODUCT_STATUS_TEMP = 8;//临时票（体验票）
 	public static final Integer PRODUCT_STATUS_DELETE = 9;//只在打包产品中售卖
 	
+	public static final Integer THIRD_RESPONSE_CODE_SHENDA = 0;//深大订单接口-0代表响应成功
 	
 }
