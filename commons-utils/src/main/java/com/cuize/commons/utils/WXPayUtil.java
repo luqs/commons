@@ -1,7 +1,9 @@
 package com.cuize.commons.utils;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.StringReader;
 import java.security.MessageDigest;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,6 +12,10 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.SortedMap;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 
 import org.jdom.Document;
 import org.jdom.Element;
@@ -20,7 +26,6 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class WXPayUtil {
-	
 
 	public static String getPrepayXml(SortedMap<String, String> parameters) {
 		StringBuffer sb = new StringBuffer();
@@ -56,7 +61,7 @@ public class WXPayUtil {
 				sb.append(k + "=" + v + "&");
 			}
 		}
-		sb.append("key="+apiKey);
+		sb.append("key=aDdfoi123D093Ilfi900azcjholoaa2Z");
 		String sign = MD5Encode(sb.toString(), characterEncoding).toUpperCase();
 		return sign;
 	}
@@ -96,77 +101,80 @@ public class WXPayUtil {
 
 	private static final String hexDigits[] = { "0", "1", "2", "3", "4", "5",
 			"6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
-	
+
 	/**
 	 * 解析xml,返回第一级元素键值对。如果第一级元素有子节点，则此节点的值是子节点的xml数据。
+	 * 
 	 * @param strxml
 	 * @return
 	 * @throws JDOMException
 	 * @throws IOException
 	 */
 	@SuppressWarnings({ "rawtypes" })
-	public static Map<String,String> xml2map(String strxml) throws JDOMException, IOException {
+	public static Map<String, String> xml2map(String strxml)
+			throws JDOMException, IOException {
 		strxml = strxml.replaceFirst("encoding=\".*\"", "encoding=\"UTF-8\"");
 
-		if(null == strxml || "".equals(strxml)) {
+		if (null == strxml || "".equals(strxml)) {
 			return null;
 		}
-		
-		Map<String,String> m = new HashMap<String,String>();
-		
+
+		Map<String, String> m = new HashMap<String, String>();
+
 		InputStream in = new ByteArrayInputStream(strxml.getBytes("UTF-8"));
 		SAXBuilder builder = new SAXBuilder();
 		Document doc = builder.build(in);
 		Element root = doc.getRootElement();
 		List list = root.getChildren();
 		Iterator it = list.iterator();
-		while(it.hasNext()) {
+		while (it.hasNext()) {
 			Element e = (Element) it.next();
 			String k = e.getName();
 			String v = "";
 			List children = e.getChildren();
-			if(children.isEmpty()) {
+			if (children.isEmpty()) {
 				v = e.getTextNormalize();
 			} else {
 				v = getChildrenText(children);
 			}
-			
+
 			m.put(k, v);
 		}
-		
-		//关闭流
+
+		// 关闭流
 		in.close();
-		
+
 		return m;
 	}
-	
+
 	/**
 	 * 获取子结点的xml
+	 * 
 	 * @param children
 	 * @return String
 	 */
 	@SuppressWarnings({ "rawtypes" })
 	public static String getChildrenText(List children) {
 		StringBuffer sb = new StringBuffer();
-		if(!children.isEmpty()) {
+		if (!children.isEmpty()) {
 			Iterator it = children.iterator();
-			while(it.hasNext()) {
+			while (it.hasNext()) {
 				Element e = (Element) it.next();
 				String name = e.getName();
 				String value = e.getTextNormalize();
 				List list = e.getChildren();
 				sb.append("<" + name + ">");
-				if(!list.isEmpty()) {
+				if (!list.isEmpty()) {
 					sb.append(getChildrenText(list));
 				}
 				sb.append(value);
 				sb.append("</" + name + ">");
 			}
 		}
-		
+
 		return sb.toString();
 	}
-	
+
 	public static String createNoncestr() {
 		String chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
 		String res = "";
@@ -176,17 +184,22 @@ public class WXPayUtil {
 		}
 		return res;
 	}
-	
-	public static <T> T xml2bean(String xmlStr, Class<T> cls) {
-        XStream xstream = new XStream(new DomDriver());
-        xstream.processAnnotations(cls);
-        @SuppressWarnings("unchecked")
-        T t = (T) xstream.fromXML(xmlStr);
-        return t;
-    }
-	
-	public static void main(String[] args) throws JDOMException, IOException {
-		String xml="<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg><appid><![CDATA[wxa80956dc1efa927b]]></appid><mch_id><![CDATA[1251209101]]></mch_id><nonce_str><![CDATA[aUtxJMneQJyxuWKJ]]></nonce_str><sign><![CDATA[A7ECC6AEC283949382015BB43D7AFBE3]]></sign><result_code><![CDATA[SUCCESS]]></result_code><prepay_id><![CDATA[wx20160316191444e396b041b00090600135]]></prepay_id><trade_type><![CDATA[JSAPI]]></trade_type></xml>";
-		System.out.println(xml2map(xml).get("123"));
+
+	@SuppressWarnings("unchecked")
+	public static <T> T xml2bean(String xml, Class<T> c) throws JAXBException {
+		T t = null;
+		JAXBContext context = JAXBContext.newInstance(c);
+		Unmarshaller unmarshaller = context.createUnmarshaller();
+		t = (T) unmarshaller.unmarshal(new StringReader(xml));
+		return t;
 	}
+
+	public static <T> T xml2beanx(String xmlStr, Class<T> cls) {
+		XStream xstream = new XStream(new DomDriver());
+		xstream.processAnnotations(cls);
+		@SuppressWarnings("unchecked")
+		T t = (T) xstream.fromXML(xmlStr);
+		return t;
+	}
+
 }
