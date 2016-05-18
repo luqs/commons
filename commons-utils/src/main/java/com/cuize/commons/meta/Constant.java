@@ -33,4 +33,8 @@ public interface Constant {
 	
 	public static final Integer THIRD_RESPONSE_CODE_SHENDA = 0;//深大订单接口-0代表响应成功
 	
+	public static final Integer PRODUCT_CATEGORY_EXT_PACK=1;
+	public static final Integer PRODUCT_CATEGORY_EXT_TICKET=2;
+	public static final Integer PRODUCT_CATEGORY_EXT_HOTEL=3;
+	
 }
