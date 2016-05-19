@@ -12,11 +12,13 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 import java.util.SortedMap;
+import java.util.TreeMap;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 
+import org.apache.commons.lang3.StringUtils;
 import org.jdom.Document;
 import org.jdom.Element;
 import org.jdom.JDOMException;
@@ -26,6 +28,14 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
 public class WXPayUtil {
+	
+	public static void main(String[] args) {
+		SortedMap<String,String> m = new TreeMap<String,String>();
+		m.put("attach", null);
+		m.put("s", null);
+		m.put("e", "123");
+		System.out.println(getPrepayXml(m));
+	}
 
 	public static String getPrepayXml(SortedMap<String, String> parameters) {
 		StringBuffer sb = new StringBuffer();
@@ -36,6 +46,9 @@ public class WXPayUtil {
 			Map.Entry<String, String> entry = it.next();
 			String k = (String) entry.getKey();
 			String v = (String) entry.getValue();
+			if(StringUtils.isBlank(v)){
+				continue;
+			}
 			if ("attach".equalsIgnoreCase(k) || "body".equalsIgnoreCase(k)
 					|| "sign".equalsIgnoreCase(k)) {
 				sb.append("<" + k + ">" + "" + v + "</" + k + ">");
