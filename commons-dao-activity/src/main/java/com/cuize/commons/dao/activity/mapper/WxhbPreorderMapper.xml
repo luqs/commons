@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cuize.commons.dao.activity.mapper.WxhbPreorderMapper">
+	<resultMap id="wxhbPreoderResultMap"
+		type="com.cuize.commons.dao.activity.domain.WxhbPreorder">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result property="mchId" column="mch_id"/>
+		<result property="mchBillNo" column="mch_id"/>
+		<result property="mchName" column="mch_billno"/>
+		<result property="hbType" column="mch_name"/>
+		<result property="totalAmount" column="hb_type"/>
+		<result property="totalNum" column="total_amount"/>
+		<result property="amtType" column="total_num"/>
+		<result property="wishing" column="amt_type"/>
+		<result property="actName" column="wishing"/>
+		<result property="remark" column="remark"/>
+		<result property="detailId" column="detail_id"/>
+		<result property="sendTime" column="send_time"/>
+		<result property="result" column="result"/>
+		<result property="expireTime" column="expire_time"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+	</resultMap>
+
+	<insert id="insertWxhbPreorder" parameterType="com.cuize.commons.dao.activity.domain.WxhbPreorder"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into wxhb_preorder(
+			mch_id,
+			mch_billno,
+			mch_name,
+			hb_type,
+			total_amount,
+			total_num,
+			amt_type,
+			wishing,
+			act_name,
+			remark,
+			create_time
+		) values (
+			#{mchId},
+			#{mchBillNo},
+			#{mchName},
+			#{hbType},
+			#{totalAmount},
+			#{totalNum},
+			#{amtType},
+			#{wishing},
+			#{actName},
+			#{remark},
+			NOW()
+		)
+	</insert>
+	
+	<update id="updateWxhbPreorder" parameterType="com.cuize.commons.dao.activity.domain.WxhbPreorder">
+		update 
+			wxhb_preorder
+			<set>
+				<if test="detailId != null">
+					detail_id = #{detailId},
+				</if>
+				<if test="sendTime != null">
+					detail_id = #{sendTime},
+				</if>
+				<if test="result != null">
+					result = #{result},
+				</if>
+				<if test="expireTime != null">
+					expire_time = #{expireTime},
+				</if>
+				update_time = NOW()
+			</set>
+		where
+			id = #{id}
+	</update>
+	
+	
+	<resultMap id="wxhbPreoderTicketResultMap"
+		type="com.cuize.commons.dao.activity.domain.WxhbPreorderTicket">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result property="hbPreorderId" column="hb_preorder_id"/>
+		<result property="ticket" column="ticket"/>
+		<result property="status" column="status"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<insert id="insertWxhbPreorderTicket" parameterType="com.cuize.commons.dao.activity.domain.WxhbPreorderTicket"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into wxhb_preorder_ticket(
+			hb_preorder_id,
+			ticket,
+			status,
+			create_time
+		) values (
+			#{hbPreorderId},
+			#{ticket},
+			#{status},
+			NOW()
+		)
+	</insert>
+	
+	<update id="updateWxhbPreorderTicketStatusByTicket" parameterType="java.util.List">
+		update 
+			wxhb_preorder_ticket
+		set
+			status = 1,
+			update_time = NOW()
+		where
+			ticket in
+			<foreach collection="list" item="item" index="index" open="(" separator="," close=")">
+				#{item}
+			</foreach>
+	</update>
+	
+</mapper>

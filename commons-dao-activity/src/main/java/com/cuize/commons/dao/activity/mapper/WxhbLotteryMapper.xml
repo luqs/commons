@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cuize.commons.dao.activity.mapper.WxhbLotteryMapper">
+	<resultMap id="wxhbLotteryResultMap"
+		type="com.cuize.commons.dao.activity.domain.WxhbLottery">
+		<id column="id" property="id" />
+		<result property="useTemplate" column="use_template"/>
+		<result property="logoUrl" column="logo_url"/>
+		<result property="title" column="title"/>
+		<result property="description" column="description"/>
+		<result property="status" column="status"/>
+		<result property="beginTime" column="begin_time"/>
+		<result property="expireTime" column="expire_time"/>
+		<result property="total" column="total"/>
+		<result property="lotteryId" column="lottery_id"/>
+		<result property="pageId" column="page_id"/>
+		<result property="result" column="result"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+	</resultMap>
+
+	<insert id="insertWxhbLottery" parameterType="com.cuize.commons.dao.activity.domain.WxhbLottery"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into wxhb_lottery(
+			use_template,
+			logo_url,
+			title,
+			description,
+			status,
+			begin_time,
+			expire_time,
+			total,
+			create_time
+		) values (
+			#{useTemplate},
+			#{logoUrl},
+			#{title},
+			#{description},
+			#{status},
+			#{beginTime},
+			#{expireTime},
+			#{total},
+			NOW()
+		)
+	</insert>
+	
+	<update id="updateWxhbLottery" parameterType="com.cuize.commons.dao.activity.domain.WxhbLottery">
+		update 
+			wxhb_lottery
+			<set>
+				<if test="lotteryId != null">
+					lottery_id = #{lotteryId},
+				</if>
+				<if test="pageId != null">
+					page_id = #{pageId},
+				</if>
+				<if test="result != null">
+					result = #{result},
+				</if>
+				update_time = NOW()
+			</set>
+		where
+			id = #{id}
+	</update>
+	
+	<update id="updateWxhbLotteryStatus">
+		update 
+			wxhb_lottery
+		set
+			status = #{status},
+			update_time = NOW()
+		where
+			id = #{id}
+	</update>
+	
+	<select id="queryWxhbLotteryById" resultMap="wxhbLotteryResultMap">
+		select
+			* 
+		from 
+			wxhb_lottery
+		where
+			id = #{id}
+	</select>
+	
+	<select id="queryWxhbLotteryByLotteryId"  resultMap="wxhbLotteryResultMap">
+		select
+			* 
+		from 
+			wxhb_lottery
+		where
+			lottery_id = #{lotteryId}
+		order by 
+			id desc 
+		limit 1
+	</select>	
+	
+	
+	<resultMap id="wxhbLotteryTicketResultMap"
+		type="com.cuize.commons.dao.activity.domain.WxhbLotteryTicket">
+		<id column="id" property="id" />
+		<result property="hbLotteryId" column="hb_lottery_id"/>
+		<result property="ticket" column="ticket"/>
+		<result property="openId" column="open_id"/>
+		<result property="lotteryId" column="lottery_id"/>
+		<result property="bindTime" column="bind_time"/>
+		<result property="money" column="money"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<insert id="batchInsertWxhbLotteryTicket" >
+		insert into wxhb_lottery_ticket(
+			hb_lottery_id,
+			ticket,
+			lottery_id,
+			create_time
+		) values 
+		<foreach collection="list" item="item" index="index" separator=",">
+			(
+				#{item.hbLotteryId},
+				#{item.ticket},
+				#{item.lotteryId},
+				NOW()
+			)
+		</foreach>
+	</insert>
+	
+	<update id="wxhbLotteryTicketBindNotice" parameterType="com.cuize.commons.dao.activity.domain.WxhbLotteryTicket">
+		update 
+			wxhb_lottery_ticket
+		set
+			open_id = #{openId},
+			bind_time = #{bingTime},
+			money = #{money},
+			update_time = NOW()
+		where
+			lottery_id = #{lotteryId}
+			and ticket = #{ticket}
+	</update>
+</mapper>
