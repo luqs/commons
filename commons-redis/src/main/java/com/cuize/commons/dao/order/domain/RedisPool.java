@@ -3,7 +3,6 @@ package com.cuize.commons.dao.order.domain;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.config.GlobleConfig;
 
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -42,14 +41,14 @@ public class RedisPool {
 			synchronized (RedisPool.class) {
 				if (jedisPool == null) {
 					LOG.info("创建jedis连接池开始");
-					String serverIp = GlobleConfig.getRedisServer();
-					int port = GlobleConfig.getRedisPort();
-					String password = GlobleConfig.getRedisPassword();
-					int maxActive = GlobleConfig.getRedisPoolMaxActive();
-					int maxIdle = GlobleConfig.getRedisPoolMaxIdle();
-					int maxWait = GlobleConfig.getRedisPoolMaxWait();
-					boolean testOnBorrow = GlobleConfig.isRedisPoolTestOnBorrow();
-					int timeout = GlobleConfig.getRedisTimeOut();
+					String serverIp = RedisPropertiesConfig.getRedisServer();
+					int port = RedisPropertiesConfig.getRedisPort();
+					String password = RedisPropertiesConfig.getRedisPassword();
+					int maxActive = RedisPropertiesConfig.getRedisPoolMaxActive();
+					int maxIdle = RedisPropertiesConfig.getRedisPoolMaxIdle();
+					int maxWait = RedisPropertiesConfig.getRedisPoolMaxWait();
+					boolean testOnBorrow = RedisPropertiesConfig.isRedisPoolTestOnBorrow();
+					int timeout = RedisPropertiesConfig.getRedisTimeOut();
 
 					JedisPoolConfig config = new JedisPoolConfig();
 					config.setMaxActive(maxActive);
