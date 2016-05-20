@@ -5,8 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
-import com.cuize.commons.redis.OrderDetail;
-import com.cuize.commons.redis.OrderDetailExample;
+import com.cuize.commons.dao.order.domain.OrderDetail;
+import com.cuize.commons.dao.order.domain.OrderDetailExample;
 
 public interface OrderDetailMapper {
 

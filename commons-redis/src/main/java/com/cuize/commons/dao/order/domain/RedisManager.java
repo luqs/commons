@@ -4,7 +4,7 @@
  * Date:2013-05-23
  * Description:redis manager
  */
-package com.cuize.commons.redis;
+package com.cuize.commons.dao.order.domain;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -29,7 +29,6 @@ import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
 import redis.clients.jedis.Jedis;

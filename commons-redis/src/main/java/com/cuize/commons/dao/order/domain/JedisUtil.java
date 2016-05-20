@@ -1,4 +1,4 @@
-package com.cuize.commons.redis;
+package com.cuize.commons.dao.order.domain;
 
 import java.util.List;
 import java.util.Map;

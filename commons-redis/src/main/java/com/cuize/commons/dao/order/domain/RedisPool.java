@@ -1,12 +1,7 @@
-package com.cuize.commons.redis;
-
-import java.util.Map;
-
-import javax.annotation.Resource;
+package com.cuize.commons.dao.order.domain;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
 import com.config.GlobleConfig;
 

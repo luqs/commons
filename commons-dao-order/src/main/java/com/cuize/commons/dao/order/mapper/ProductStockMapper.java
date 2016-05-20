@@ -1,7 +1,7 @@
 package com.cuize.commons.dao.order.mapper;
 
-import com.cuize.commons.redis.ProductStock;
-import com.cuize.commons.redis.ProductStockExample;
+import com.cuize.commons.dao.order.domain.ProductStock;
+import com.cuize.commons.dao.order.domain.ProductStockExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 

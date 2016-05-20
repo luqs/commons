@@ -1,7 +1,7 @@
 package com.cuize.commons.dao.order.mapper;
 
-import com.cuize.commons.redis.OrderDetailPackdtl;
-import com.cuize.commons.redis.OrderDetailPackdtlExample;
+import com.cuize.commons.dao.order.domain.OrderDetailPackdtl;
+import com.cuize.commons.dao.order.domain.OrderDetailPackdtlExample;
 
 import java.util.List;
 
