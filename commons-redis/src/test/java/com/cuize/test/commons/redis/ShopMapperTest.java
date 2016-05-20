@@ -1,9 +1,10 @@
-package com.cuize.test.commons.dao.order;
+package com.cuize.test.commons.redis;
+
+import java.io.Serializable;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.cuize.commons.dao.order.mapper.OrderMapper;
+import org.springframework.data.redis.core.RedisTemplate;
 
 /**
  * @author Ralph
@@ -13,8 +14,8 @@ import com.cuize.commons.dao.order.mapper.OrderMapper;
 public class ShopMapperTest extends DaoBaseAppTest{
 //	private static final Logger logger = LoggerFactory.getLogger(InsuranceOrderMapperTest.class);
 
-	@Autowired
-	private OrderMapper shopMapper;
+	 @Autowired
+	    private RedisTemplate<Serializable, Serializable> template;
 	/*
 	@Test
 	public void selectByExample(){
@@ -30,7 +31,7 @@ public class ShopMapperTest extends DaoBaseAppTest{
 	@Test
 	public void selectDescOrderByExample(){
 		
-//		System.out.println(shopMapper.selectByPrimaryKey(3));
+		System.out.println(template.isExposeConnection());
 	}
 	
 	/*

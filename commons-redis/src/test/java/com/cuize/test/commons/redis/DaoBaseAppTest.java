@@ -1,4 +1,4 @@
-package com.cuize.test.commons.dao.order;
+package com.cuize.test.commons.redis;
 
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;

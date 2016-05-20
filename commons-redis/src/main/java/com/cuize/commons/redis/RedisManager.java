@@ -4,7 +4,7 @@
  * Date:2013-05-23
  * Description:redis manager
  */
-package com.cuize.commons.dao.order.domain;
+package com.cuize.commons.redis;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -38,7 +38,6 @@ public class RedisManager {
 	private static final Logger LOG = LoggerFactory.getLogger(RedisManager.class);
 	
     @Autowired
-    @Qualifier("redisTemplate")
     private RedisTemplate<Serializable, Serializable> template;
 
     /**

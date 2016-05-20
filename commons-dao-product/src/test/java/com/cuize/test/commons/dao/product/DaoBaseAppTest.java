@@ -6,9 +6,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@ActiveProfiles(value="local")
+@ActiveProfiles(value="sit")
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:/spring-datasource.xml")
+@ContextConfiguration(locations = "classpath:/spring-datasource*.xml")
 public class DaoBaseAppTest {
 
 	// private static ApplicationContext context = new ClassPathXmlApplicationContext("classpath:/spring-context.xml");
