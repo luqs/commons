@@ -371,12 +371,6 @@
        		<version>1.4.7</version>
    		</dependency>
    		
-   		<dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-redis</artifactId>
-            <version>1.0.3.RELEASE</version>
-        </dependency>
-        
         <dependency>
             <groupId>commons-pool</groupId>
             <artifactId>commons-pool</artifactId>
