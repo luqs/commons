@@ -6,10 +6,6 @@
  */
 package com.cuize.commons.dao.order.domain;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,9 +26,6 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
-
-import redis.clients.jedis.Jedis;
-import redis.clients.jedis.JedisPool;
 
 /**
  * Redis管理类
@@ -210,7 +203,6 @@ public class RedisManager {
         boolean result = template.execute(new RedisCallback<Boolean>() {
             public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
                 RedisSerializer<String> serializer = getRedisSerializer();
-                long fresh = System.currentTimeMillis();// 统一新鲜度
                 for (Map<Object, Object> map : list) {
                     String keyStr = (String) map.get("key");// yuwei&23728&K8456&NUH&RBH&7&20151004
                     byte[] key = serializer.serialize(keyStr);
@@ -295,56 +287,6 @@ public class RedisManager {
             }
         }, false, true);
         return result;
-    }
-
-    public Object getValueForObject(String key) {
-        Jedis jedis = null;
-        Object o = null;
-        ObjectInputStream ois = null;
-        ByteArrayInputStream bais = null;
-        JedisPool jedisPool = null;
-        try {
-            jedisPool = RedisPool.getJedisPool();
-            jedis = jedisPool.getResource();
-            byte[] bs = jedis.get(key.getBytes());
-            bais = new ByteArrayInputStream(bs);
-            ois = new ObjectInputStream(bais);
-            o = ois.readObject();
-        } catch (Exception e) {
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
-            }
-            o = null;
-        } finally {
-            if (jedis != null && jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
-        }
-        return o;
-    }
-
-    public void setValueForObject(String key, Object object, int export) {
-        ObjectOutputStream oos = null;
-        ByteArrayOutputStream baos = null;
-        JedisPool jedisPool = null;
-        Jedis jedis = null;
-        try {
-            jedisPool = RedisPool.getJedisPool();
-            jedis = jedisPool.getResource();
-            baos = new ByteArrayOutputStream();
-            oos = new ObjectOutputStream(baos);
-            oos.writeObject(object);
-            byte[] bytes = baos.toByteArray();
-            jedis.setex(key.getBytes(), export, bytes);
-        } catch (Exception e) {
-            if (jedisPool != null) {
-                jedisPool.returnBrokenResource(jedis);
-            }
-        } finally {
-            if (jedis != null && jedisPool != null) {
-                jedisPool.returnResource(jedis);
-            }
-        }
     }
 
     /**
