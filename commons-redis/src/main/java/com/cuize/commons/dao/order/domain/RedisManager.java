@@ -310,8 +310,81 @@ public class RedisManager {
         } else {
             return null;
         }
-
     }
     
-    
+	/**
+	 * 获取队列指定区间的元素
+	 * @param key
+	 * @param from 从0开始
+	 * @param to 最后一个为-1
+	 * @return
+	 */
+	public List<String> lrange(String key, int from, int to){
+		List<String> result = new ArrayList<String>();
+		RedisConnection conn = null;
+		try {
+			conn = template.getConnectionFactory().getConnection();
+			RedisSerializer<String> serializer = getRedisSerializer();
+			List<byte[]> resultList = conn.lRange(serializer.serialize(key), from, to);
+			if (resultList != null && !resultList.isEmpty()) {
+				for (byte[] b : resultList) {
+					result.add(serializer.deserialize(b));
+				}
+			}
+		} catch (Exception e) {
+			LOG.error("RedisManager.lrange异常", e);
+		} finally {
+			if (!conn.isClosed()) {
+				conn.close();
+			}
+		}
+		return result;
+	}
+	
+	
+	/**
+	 * 插入Redis队列尾部
+	 * @param key reids键名
+	 * @param value 键值
+	 */
+	public boolean rpush(final String key, final String value) {
+		boolean result = template.execute(new RedisCallback<Boolean>() {
+			 @Override
+	         public Boolean doInRedis(RedisConnection connection) {
+				 RedisSerializer<String> serializer = getRedisSerializer();
+				 byte[] keyBs = serializer.serialize(key);
+                 byte[] valueBs = serializer.serialize(value);
+				 
+                 connection.rPush(keyBs, valueBs);
+				 return true;
+			 }
+		});
+		
+		return result;
+	}
+	
+	/** 
+	 * 获取队列第一个数据
+	 * @param key 键名
+	 * @return
+	 */
+	public String lpop(String key) {
+		String value = null;
+		RedisConnection conn = null;
+		try {
+			conn = template.getConnectionFactory().getConnection();
+			RedisSerializer<String> serializer = getRedisSerializer();
+			byte[] valueBs = conn.lPop(serializer.serialize(key));
+			if (valueBs.length > 0) {
+				value = serializer.deserialize(valueBs);
+			}
+		} catch (Exception e) {
+			LOG.error("RedisManager.lpop异常", e);
+		} finally {
+			if (!conn.isClosed()) {
+				conn.close();
+			}
+		}
+		return value;
+	}
 }
