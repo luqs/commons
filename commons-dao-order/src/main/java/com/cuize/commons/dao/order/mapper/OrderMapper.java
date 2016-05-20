@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.cuize.commons.dao.order.domain.Order;
-import com.cuize.commons.dao.order.domain.OrderExample;
+import com.cuize.commons.redis.Order;
+import com.cuize.commons.redis.OrderExample;
 
 public interface OrderMapper {
 

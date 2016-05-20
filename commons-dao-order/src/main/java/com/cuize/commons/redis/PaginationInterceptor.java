@@ -1,4 +1,4 @@
-package com.cuize.commons.dao.order.domain;
+package com.cuize.commons.redis;
 
 import java.sql.Connection;
 import java.util.Properties;

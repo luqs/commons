@@ -35,7 +35,7 @@
 		<property name="typeAliasesPackage" value="com.cuize.commons.dao.order.domain" />
 		<property name="configLocation" value="classpath:mybatis-config-order.xml"/>
 		<property name="plugins">  
-        	<bean class="com.cuize.commons.dao.order.domain.PaginationInterceptor">  
+        	<bean class="PaginationInterceptor">
        		</bean>  
     	</property>  
 	</bean>

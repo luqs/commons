@@ -1,7 +1,7 @@
 package com.cuize.commons.dao.order.mapper;
 
-import com.cuize.commons.dao.order.domain.OrderOptlog;
-import com.cuize.commons.dao.order.domain.OrderOptlogExample;
+import com.cuize.commons.redis.OrderOptlog;
+import com.cuize.commons.redis.OrderOptlogExample;
 
 import java.util.List;
 
