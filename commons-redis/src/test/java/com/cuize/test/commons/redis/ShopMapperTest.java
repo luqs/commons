@@ -1,10 +1,9 @@
 package com.cuize.test.commons.redis;
 
-import java.io.Serializable;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+
+import com.cuize.commons.redis.RedisManager;
 
 /**
  * @author Ralph
@@ -15,7 +14,7 @@ public class ShopMapperTest extends DaoBaseAppTest{
 //	private static final Logger logger = LoggerFactory.getLogger(InsuranceOrderMapperTest.class);
 
 	 @Autowired
-	    private RedisTemplate<Serializable, Serializable> template;
+	 private RedisManager template;
 	/*
 	@Test
 	public void selectByExample(){
@@ -31,7 +30,7 @@ public class ShopMapperTest extends DaoBaseAppTest{
 	@Test
 	public void selectDescOrderByExample(){
 		
-		System.out.println(template.isExposeConnection());
+		System.out.println(template.lpop("123"));
 	}
 	
 	/*
