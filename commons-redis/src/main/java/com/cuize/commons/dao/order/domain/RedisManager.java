@@ -375,7 +375,7 @@ public class RedisManager {
 			conn = template.getConnectionFactory().getConnection();
 			RedisSerializer<String> serializer = getRedisSerializer();
 			byte[] valueBs = conn.lPop(serializer.serialize(key));
-			if (valueBs.length > 0) {
+			if (valueBs != null && valueBs.length > 0) {
 				value = serializer.deserialize(valueBs);
 			}
 		} catch (Exception e) {
