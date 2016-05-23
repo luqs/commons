@@ -37,4 +37,5 @@ public interface Constant {
 	public static final Integer PRODUCT_CATEGORY_EXT_TICKET=2;
 	public static final Integer PRODUCT_CATEGORY_EXT_HOTEL=3;
 	
+	public static final String  REDISKEY_ORDERAUTOCREATEUSERQUEUE ="redis.crm.orderautocreateuserqueue";
 }
