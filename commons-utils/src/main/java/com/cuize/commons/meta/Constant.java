@@ -38,4 +38,7 @@ public interface Constant {
 	public static final Integer PRODUCT_CATEGORY_EXT_HOTEL=3;
 	
 	public static final String  REDISKEY_ORDERAUTOCREATEUSERQUEUE ="redis.crm.orderautocreateuserqueue";
+	
+	public static final Integer ORDER_REFUND_STATUS_CREATE = 0; //待退票新建
+	public static final Integer ORDER_REFUND_STATUS_FINISH = 1; //已退票已完成
 }
