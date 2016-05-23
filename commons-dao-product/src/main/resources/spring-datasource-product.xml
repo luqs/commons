@@ -14,7 +14,7 @@
 
 
 
-	<tx:annotation-driven />
+	<tx:annotation-driven transaction-manager="productTransactionManager"/>
 	<bean id="productDataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy">
 		<property name="targetDataSource">
 			<bean id="dataSourceTarget" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close">
