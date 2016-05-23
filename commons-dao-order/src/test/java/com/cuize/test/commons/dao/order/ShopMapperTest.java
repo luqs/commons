@@ -30,7 +30,7 @@ public class ShopMapperTest extends DaoBaseAppTest{
 	@Test
 	public void selectDescOrderByExample(){
 		
-//		System.out.println(shopMapper.selectByPrimaryKey(3));
+		System.out.println(shopMapper.selectByPrimaryKey(3));
 	}
 	
 	/*
