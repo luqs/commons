@@ -44,8 +44,8 @@ public class WXPayUtil {
 		Iterator<Map.Entry<String, String>> it = es.iterator();
 		while (it.hasNext()) {
 			Map.Entry<String, String> entry = it.next();
-			String k = (String) entry.getKey();
-			String v = (String) entry.getValue();
+			String k =  entry.getKey();
+			String v =  entry.getValue();
 			if(StringUtils.isBlank(v)){
 				continue;
 			}
@@ -67,7 +67,7 @@ public class WXPayUtil {
 		Iterator<Map.Entry<String, String>> it = es.iterator();
 		while (it.hasNext()) {
 			Map.Entry<String, String> entry = it.next();
-			String k = (String) entry.getKey();
+			String k =  entry.getKey();
 			Object v = entry.getValue();
 			if (null != v && !"".equals(v) && !"sign".equals(k)
 					&& !"key".equals(k)) {
