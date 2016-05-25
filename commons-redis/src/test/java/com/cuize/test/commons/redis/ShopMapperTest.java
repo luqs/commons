@@ -29,7 +29,7 @@ public class ShopMapperTest extends DaoBaseAppTest{
 	
 	@Test
 	public void selectDescOrderByExample(){
-		
+		template.rpush("123","234");
 		System.out.println(template.lpop("123"));
 	}
 	
