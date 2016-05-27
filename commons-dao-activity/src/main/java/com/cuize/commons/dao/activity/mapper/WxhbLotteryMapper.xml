@@ -94,6 +94,43 @@
 		limit 1
 	</select>	
 	
+	<select id="queryWxhbLotteryByPage" resultMap="wxhbLotteryResultMap">
+		select 
+			*
+		from
+			wxhb_lottery
+		where 
+			1 = 1
+			<if test="query.status != null and query.status == 0">
+				and status = 0
+			</if>
+			<if test="query.status != null and query.status == 1">
+				and status = 1
+			</if>		
+			<if test="query.title != null and query.title !=''">
+				<![CDATA[ and title like CONCAT('%', #{query.title, jdbcType=VARCHAR} ,'%') ]]>
+			</if>	
+			limit #{page.start}, #{page.limit}
+	</select>
+	
+	<select id="countWxhbLotteryPage" resultType="java.lang.Integer">
+		select 
+			count(id)
+		from
+			wxhb_lottery
+		where 
+			1 = 1
+			<if test="query.status != null and query.status == 0">
+				and status = 0
+			</if>
+			<if test="query.status != null and query.status == 1">
+				and status = 1
+			</if>		
+			<if test="query.title != null and query.title !=''">
+				<![CDATA[ and title like CONCAT('%', #{query.title, jdbcType=VARCHAR} ,'%') ]]>
+			</if>	
+	</select>
+	
 	
 	<resultMap id="wxhbLotteryTicketResultMap"
 		type="com.cuize.commons.dao.activity.domain.WxhbLotteryTicket">
@@ -137,4 +174,86 @@
 			lottery_id = #{lotteryId}
 			and ticket = #{ticket}
 	</update>
+	
+	
+	<resultMap id="wxhbLotteryBindTicketResultMap"
+		type="com.cuize.commons.dao.activity.resultvo.WxhbLotteryBindTicketVO">
+		<id column="id" property="hbLotteryId" />
+		<result property="ticket" column="ticket"/>
+		<result property="title" column="title"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+	</resultMap>
+	
+	<select id="queryWxhbLotteryBindTicketByPage" resultMap="wxhbLotteryBindTicketResultMap">
+		SELECT 
+			l.id as id,
+			l.title as title,
+			t.ticket as ticket,
+			t.create_time as create_time,
+			t.update_time as update_time
+			
+		FROM 
+			wxhb_lottery_ticket t 
+			left join wxhb_lottery l 
+			on t.hb_lottery_id = l.id 
+		where 
+			l.id = #{hbLotteryId}
+			limit #{page.start}, #{page.limit}
+	</select>
+	
+	<select id="countWxhbLotteryBindTicketByPage" resultType="java.lang.Integer">
+		SELECT 
+			count(t.id)
+		FROM 
+			wxhb_lottery_ticket t 
+			left join wxhb_lottery l 
+			on t.hb_lottery_id = l.id 
+		where 
+			l.id = #{hbLotteryId}	
+	</select>
+	
+	<resultMap id="wxhbLotteryUnbindTicketResultMap"
+		type="com.cuize.commons.dao.activity.resultvo.WxhbLotteryUnbindTicketVO">
+		<id column="id" property="id" />
+		<result property="hbType" column="hb_type"/>
+		<result property="totalAmount" column="total_amount"/>
+		<result property="totalNum" column="total_num"/>
+		<result property="createTime" column="create_time"/>
+		<result property="expireTime" column="expire_time"/>
+		<result property="ticket" column="ticket"/>
+	</resultMap>
+	
+	<select id="queryUnBindTicketByPage" resultMap="wxhbLotteryUnbindTicketResultMap">
+		select 
+			p.id as id,
+			p.hb_type as hb_type,
+			p.total_amount as total_amount,
+			p.total_num as total_num,
+			p.create_time as create_time,
+			p.expire_time as expire_time,
+			t.ticket as ticket
+		from 
+			wxhb_preorder_ticket t left join wxhb_preorder p  
+			on p.id = t.hb_preorder_id 
+		where 
+			t.status = 0
+			<![CDATA[ and p.expire_time is not null and p.expire_time > NOW() ]]>
+			limit #{page.start}, #{page.limit}
+	</select>
+	
+	<select id="countUnBindTicketByPage" resultType="java.lang.Integer">
+		select 
+			count(t.id)
+		from 
+			wxhb_preorder_ticket t left join wxhb_preorder p  
+			on p.id = t.hb_preorder_id 
+		where 
+			t.status = 0
+			<![CDATA[ and p.expire_time is not null and p.expire_time > NOW() ]]>
+	</select>
+	
+	
+	
+	
 </mapper>

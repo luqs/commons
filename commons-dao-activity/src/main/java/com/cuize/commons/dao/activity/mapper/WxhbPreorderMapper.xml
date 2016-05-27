@@ -5,14 +5,14 @@
 		type="com.cuize.commons.dao.activity.domain.WxhbPreorder">
 		<id column="id" jdbcType="INTEGER" property="id" />
 		<result property="mchId" column="mch_id"/>
-		<result property="mchBillNo" column="mch_id"/>
-		<result property="mchName" column="mch_billno"/>
-		<result property="hbType" column="mch_name"/>
-		<result property="totalAmount" column="hb_type"/>
-		<result property="totalNum" column="total_amount"/>
-		<result property="amtType" column="total_num"/>
-		<result property="wishing" column="amt_type"/>
-		<result property="actName" column="wishing"/>
+		<result property="mchBillNo" column="mch_billno"/>
+		<result property="mchName" column="mch_name"/>
+		<result property="hbType" column="hb_type"/>
+		<result property="totalAmount" column="total_amount"/>
+		<result property="totalNum" column="total_num"/>
+		<result property="amtType" column="amt_type"/>
+		<result property="wishing" column="wishing"/>
+		<result property="actName" column="act_name"/>
 		<result property="remark" column="remark"/>
 		<result property="detailId" column="detail_id"/>
 		<result property="sendTime" column="send_time"/>
@@ -73,6 +73,52 @@
 			id = #{id}
 	</update>
 	
+	<select id="queryWxhbPreorderByPage" resultMap="wxhbPreoderResultMap">
+		select 
+			*
+		from
+			wxhb_preorder
+		where 
+			1 = 1
+			<if test="query.hbType != null and query.hbType != ''">
+				and hb_type = #{query.hbType}
+			</if>
+			<if test="query.status != null and query.status == 1">
+				<![CDATA[ and expire_time is not null and expire_time > NOW()]]>
+			</if>		
+			<if test="query.status != null and query.status == 2">
+				<![CDATA[ and (( expire_time is not null and expire_time < NOW()) or expire_time is null) ]]>
+			</if>
+			limit #{page.start}, #{page.limit}
+	</select>
+	
+	<select id="countWxhbPreorderByPage" resultType="java.lang.Integer">
+		select 
+			count(id)
+		from
+			wxhb_preorder
+		where 
+			1 = 1
+			<if test="query.hbType != null and query.hbType != ''">
+				and hb_type = #{query.hbType}
+			</if>
+			<if test="query.status != null and query.status == 1">
+				<![CDATA[ and expire_time is not null and expire_time > NOW()]]>
+			</if>	
+			<if test="query.status != null and query.status == 2">
+				<![CDATA[ and ( expire_time is not null and expire_time < NOW()) or expire_time is null ]]>
+			</if>
+	</select>
+	
+	
+	<select id="queryWxhbPreorderById" resultMap="wxhbPreoderResultMap">
+		select 
+			*
+		from
+			wxhb_preorder
+		where 
+			id = #{id}
+	</select>
 	
 	<resultMap id="wxhbPreoderTicketResultMap"
 		type="com.cuize.commons.dao.activity.domain.WxhbPreorderTicket">
@@ -111,5 +157,14 @@
 				#{item}
 			</foreach>
 	</update>
+	
+	<select id="queryWxhbPreorderTicketByPreorderId" resultMap="wxhbPreoderTicketResultMap">
+		select 
+			*
+		from
+			wxhb_preorder_ticket
+		where 
+			hb_preorder_id = #{preorderId}
+	</select>
 	
 </mapper>

@@ -13,7 +13,7 @@ import com.cuize.commons.redis.RedisManager;
 public class ShopMapperTest extends DaoBaseAppTest{
 //	private static final Logger logger = LoggerFactory.getLogger(InsuranceOrderMapperTest.class);
 
-	 @Autowired
+	 //@Autowired
 	 private RedisManager template;
 	/*
 	@Test
@@ -29,8 +29,8 @@ public class ShopMapperTest extends DaoBaseAppTest{
 	
 	@Test
 	public void selectDescOrderByExample(){
-		template.rpush("123","234");
-		System.out.println(template.lpop("123"));
+		//template.rpush("123","234");
+		//System.out.println(template.lpop("123"));
 	}
 	
 	/*

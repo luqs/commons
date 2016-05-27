@@ -6,6 +6,11 @@ import org.apache.ibatis.annotations.Param;
 
 import com.cuize.commons.dao.activity.domain.WxhbLottery;
 import com.cuize.commons.dao.activity.domain.WxhbLotteryTicket;
+import com.cuize.commons.dao.activity.queryvo.common.Page;
+import com.cuize.commons.dao.activity.queryvo.lottery.LotteryQueryVO;
+import com.cuize.commons.dao.activity.queryvo.preorder.PreorderQueryVO;
+import com.cuize.commons.dao.activity.resultvo.WxhbLotteryBindTicketVO;
+import com.cuize.commons.dao.activity.resultvo.WxhbLotteryUnbindTicketVO;
 
 /**
  * 微信红包活动接口
@@ -50,9 +55,20 @@ public interface WxhbLotteryMapper {
 	 */
 	public int updateWxhbLotteryStatus(@Param("status") int status, @Param("id") int id);
 	
-/*	public List<WxhbLottery> queryWxhbLotteryByPage();
+	/**
+	 * 分页查询红包活动
+	 * @param page
+	 * @param query
+	 * @return
+	 */
+	public List<WxhbLottery> queryWxhbLotteryByPage(@Param("page")Page page, @Param("query")LotteryQueryVO query);
 	
-	public int countWxhbLotteryPage();*/
+	/**
+	 * 统计红包活动
+	 * @param query
+	 * @return
+	 */
+	public int countWxhbLotteryPage(@Param("query")LotteryQueryVO query);
 	
 	/**
 	 * 批量插入红包活动录入ticket信息
@@ -67,4 +83,33 @@ public interface WxhbLotteryMapper {
 	 * @return
 	 */
 	public int updateWxhbLotteryTicket(WxhbLotteryTicket lotteryTicket);
+	
+	/**
+	 * 分页查询红包活动绑定得红包
+	 * @param page
+	 * @param id
+	 * @return
+	 */
+	public List<WxhbLotteryBindTicketVO> queryWxhbLotteryBindTicketByPage(@Param("page")Page page, @Param("hbLotteryId")int id);
+	
+	/**
+	 * 统计红包活动绑定的红包
+	 * @param id
+	 * @return
+	 */
+	public int countWxhbLotteryBindTicketByPage(@Param("hbLotteryId")int id);
+	
+	/**
+	 * 分页查询未使用且有效的红包
+	 * @param page
+	 * @return
+	 */
+	public List<WxhbLotteryUnbindTicketVO> queryUnBindTicketByPage(@Param("page")Page page);
+	
+	/**
+	 * 统计未使用且有效的红包
+	 * @param page
+	 * @return
+	 */
+	public int countUnBindTicketByPage(@Param("page")Page page);
 }
