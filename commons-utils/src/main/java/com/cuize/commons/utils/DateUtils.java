@@ -435,6 +435,16 @@ public class DateUtils {
 			return -9999;
 		}
 	}
+	
+	public static long countCompareDays(Date start, Date end) {
+		try {
+			long days = (end.getTime() - start.getTime()) / (3600 * 24 * 1000);
+			return days;
+		} catch (Exception e) {
+			logger.error("countCompareDays error", e);
+			return -9999;
+		}
+	}
 
 	/**
 	 * Parses a string to produce a Date.
