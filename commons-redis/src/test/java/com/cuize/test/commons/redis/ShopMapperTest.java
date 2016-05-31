@@ -1,7 +1,6 @@
 package com.cuize.test.commons.redis;
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cuize.commons.redis.RedisManager;
 
@@ -29,7 +28,7 @@ public class ShopMapperTest extends DaoBaseAppTest{
 	
 	@Test
 	public void selectDescOrderByExample(){
-		//template.rpush("123","234");
+		template.rpush("123","234");
 		//System.out.println(template.lpop("123"));
 	}
 	

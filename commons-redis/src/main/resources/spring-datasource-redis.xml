@@ -13,8 +13,6 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
 
-	<tx:annotation-driven />
-		
 	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
         <property name="maxTotal" value="${redis.pool.maxTotal}"/>
         <property name="maxIdle" value="${redis.pool.maxIdle}"/>
@@ -44,6 +42,7 @@
         </property>
 	</bean>
 
-	<context:property-placeholder location="classpath*:/conf/redis.properties" ignore-unresolvable="true" />
-	<!-- <util:properties id="redisProperties" location="file:/opt/conf/commons/redis.properties" ignore-resource-not-found="true"/> -->
+	<context:property-placeholder ignore-unresolvable="true" properties-ref="redisProperties" local-override="true" />
+	<util:properties id="redisProperties" location="classpath*:/conf/redis.properties" />
+	
 </beans>
