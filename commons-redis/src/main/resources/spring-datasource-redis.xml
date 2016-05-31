@@ -43,6 +43,6 @@
 	</bean>
 
 	<context:property-placeholder ignore-unresolvable="true" properties-ref="redisProperties" local-override="true" />
-	<util:properties id="redisProperties" location="classpath*:/conf/redis.properties" />
+	<util:properties id="redisProperties" location="classpath*:/conf/redis.properties"  ignore-resource-not-found="false"/>
 	
 </beans>
