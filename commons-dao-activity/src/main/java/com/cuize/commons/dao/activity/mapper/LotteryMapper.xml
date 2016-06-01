@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cuize.commons.dao.activity.mapper.LotteryMapper">
+
+	<resultMap id="lotteryResultMap"
+		type="com.cuize.commons.dao.activity.domain.Lottery">
+		<id column="id" property="id" />
+		<result property="title" column="title"/>
+		<result property="description" column="description"/>
+		<result property="status" column="status"/>
+		<result property="processStatus" column="process_status"/>
+		<result property="beginTime" column="begin_time"/>
+		<result property="expireTime" column="expire_time"/>
+		<result property="hbType" column="hb_type"/>
+		<result property="totalAmount" column="total_amount"/>
+		<result property="total" column="total"/>
+		<result property="totalTicket" column="total_ticket"/>
+		<result property="amtType" column="amt_type"/>
+		<result property="wishing" column="wishing"/>
+		<result property="perMinAmount" column="per_min_amount"/>
+		<result property="perMaxAmount" column="per_max_amount"/>
+		<result property="amountType" column="amount_type"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+	</resultMap>
+
+	<insert id="insertLottery" parameterType="com.cuize.commons.dao.activity.domain.Lottery"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into lottery(
+			title,
+			description,
+			status,
+			process_status,
+			begin_time,
+			expire_time,
+			hb_type,
+			total_amount,
+			total,
+			total_ticket,
+			amt_type,
+			wishing,
+			per_min_amount,
+			per_max_amount,
+			amount_type,
+			create_time
+		) values (
+			#{title},
+			#{description},
+			#{status},
+			#{processStatus},
+			#{beginTime},
+			#{expireTime},
+			#{hbType},
+			#{totalAmount},
+			#{total},
+			#{totalTicket},
+			#{amtType},
+			#{wishing},
+			#{perMinAmount},
+			#{perMaxAmount},
+			#{amountType},
+			NOW()
+		)
+	</insert>
+	
+	<select id="queryLatestLottery" resultMap="lotteryResultMap">
+		select 
+			*
+		from 
+			lottery
+		where
+			process_status = 0
+			order by id desc limit 1
+	</select>
+	
+	<update id="updateLottery">
+		update 
+			lottery
+		set
+			process_status = #{processStatus},
+			update_time = NOW()
+		where
+			id = #{id}
+	</update>
+	
+	<select id="queryLotteryByPage" resultMap="lotteryResultMap">
+		select 
+			*
+		from
+			lottery
+		where 
+			1 = 1
+			<if test="query.processStatus != null">
+				<![CDATA[ and process_status = #{query.processStatus}]]>
+			</if>		
+			order by id desc
+			limit #{page.start}, #{page.limit}
+	</select>
+	
+	<select id="countLotteryByPage" resultType="java.lang.Integer">
+		select 
+			count(id)
+		from
+			lottery
+		where 
+			1 = 1
+			<if test="query.processStatus != null">
+				<![CDATA[ and process_status = #{query.processStatus}]]>
+			</if>
+	</select>
+	
+</mapper>

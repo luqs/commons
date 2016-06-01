@@ -17,6 +17,7 @@
 		<result property="detailId" column="detail_id"/>
 		<result property="sendTime" column="send_time"/>
 		<result property="result" column="result"/>
+		<result property="czhbLotteryId" column="czhb_lottery_id"/>
 		<result property="expireTime" column="expire_time"/>
 		<result property="createTime" column="create_time"/>
 		<result property="updateTime" column="update_time"/>
@@ -35,6 +36,7 @@
 			wishing,
 			act_name,
 			remark,
+			czhb_lottery_id,
 			create_time
 		) values (
 			#{mchId},
@@ -47,6 +49,7 @@
 			#{wishing},
 			#{actName},
 			#{remark},
+			#{czhbLotteryId},
 			NOW()
 		)
 	</insert>
@@ -89,6 +92,7 @@
 			<if test="query.status != null and query.status == 2">
 				<![CDATA[ and (( expire_time is not null and expire_time < NOW()) or expire_time is null) ]]>
 			</if>
+			order by id desc
 			limit #{page.start}, #{page.limit}
 	</select>
 	
@@ -165,6 +169,18 @@
 			wxhb_preorder_ticket
 		where 
 			hb_preorder_id = #{preorderId}
+	</select>
+	
+	
+	<select id="queryWxhbPreorderTicketByCzhbLotteryId" resultType="String">
+		select 
+			wpt.ticket
+		from
+			wxhb_preorder_ticket wpt left join wxhb_preorder wp
+			on wpt.hb_preorder_id = wp.id
+		where 
+			wp.czhb_lottery_id = #{czhbLotteryId}
+			and wpt.status = 0
 	</select>
 	
 </mapper>

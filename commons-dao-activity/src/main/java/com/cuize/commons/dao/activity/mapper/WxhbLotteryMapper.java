@@ -7,8 +7,8 @@ import org.apache.ibatis.annotations.Param;
 import com.cuize.commons.dao.activity.domain.WxhbLottery;
 import com.cuize.commons.dao.activity.domain.WxhbLotteryTicket;
 import com.cuize.commons.dao.activity.queryvo.common.Page;
-import com.cuize.commons.dao.activity.queryvo.lottery.LotteryQueryVO;
-import com.cuize.commons.dao.activity.queryvo.preorder.PreorderQueryVO;
+import com.cuize.commons.dao.activity.queryvo.lottery.WxLotteryQueryVO;
+import com.cuize.commons.dao.activity.queryvo.preorder.WxPreorderQueryVO;
 import com.cuize.commons.dao.activity.resultvo.WxhbLotteryBindTicketVO;
 import com.cuize.commons.dao.activity.resultvo.WxhbLotteryUnbindTicketVO;
 
@@ -61,14 +61,14 @@ public interface WxhbLotteryMapper {
 	 * @param query
 	 * @return
 	 */
-	public List<WxhbLottery> queryWxhbLotteryByPage(@Param("page")Page page, @Param("query")LotteryQueryVO query);
+	public List<WxhbLottery> queryWxhbLotteryByPage(@Param("page")Page page, @Param("query")WxLotteryQueryVO query);
 	
 	/**
 	 * 统计红包活动
 	 * @param query
 	 * @return
 	 */
-	public int countWxhbLotteryPage(@Param("query")LotteryQueryVO query);
+	public int countWxhbLotteryPage(@Param("query")WxLotteryQueryVO query);
 	
 	/**
 	 * 批量插入红包活动录入ticket信息
@@ -112,4 +112,7 @@ public interface WxhbLotteryMapper {
 	 * @return
 	 */
 	public int countUnBindTicketByPage(@Param("page")Page page);
+	
+	
+	public WxhbLottery queryWxhbLotteryByCzhbLotteryId(int czhbLotteryId);
 }

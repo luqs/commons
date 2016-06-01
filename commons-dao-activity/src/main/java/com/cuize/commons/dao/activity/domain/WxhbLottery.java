@@ -32,6 +32,8 @@ public class WxhbLottery  extends BasicEntity{
 	private int pageId; //微信生成的模板页面ID
 	
 	private String result; //红包活动生成结果：success成功，fail失败
+	
+	private int czhbLotteryId = 0; // 萃泽红包活动ID，为0标识为独立创建，非0为统一创建
 
 	public int getId() {
 		return id;
@@ -129,5 +131,13 @@ public class WxhbLottery  extends BasicEntity{
 
 	public void setResult(String result) {
 		this.result = result;
+	}
+
+	public int getCzhbLotteryId() {
+		return czhbLotteryId;
+	}
+
+	public void setCzhbLotteryId(int czhbLotteryId) {
+		this.czhbLotteryId = czhbLotteryId;
 	}
 }

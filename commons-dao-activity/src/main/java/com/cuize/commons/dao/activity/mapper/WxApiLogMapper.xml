@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cuize.commons.dao.activity.mapper.WxApiLogMapper">
+
+	<resultMap id="wxApiLogResultMap"
+		type="com.cuize.commons.dao.activity.domain.WxApiLog">
+		<id column="id" property="id" />
+		<result property="apiName" column="api_name"/>
+		<result property="apiDesc" column="api_desc"/>
+		<result property="req" column="req"/>
+		<result property="rsp" column="rsp"/>
+		<result property="createTime" column="create_time"/>
+		<result property="updateTime" column="update_time"/>
+	</resultMap>
+
+	<insert id="saveWxApiLog" parameterType="com.cuize.commons.dao.activity.domain.WxApiLog"
+		keyProperty="id" useGeneratedKeys="true">
+		insert into wx_api_log(
+			api_name,
+			req,
+			create_time
+		) values (
+			#{apiName},
+			#{req},
+			NOW()
+		)
+	</insert>
+	
+	
+	<update id="updateWxApiLog" parameterType="com.cuize.commons.dao.activity.domain.WxApiLog">
+		update 
+			wx_api_log
+		set
+			rsp = #{rsp},
+			update_time = NOW()
+		where
+			id = #{id}
+	</update>
+	
+</mapper>

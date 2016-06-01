@@ -38,6 +38,8 @@ public class WxhbPreorder extends BasicEntity{
 	private String result; //预下单结果，success成功，fail失败
 
 	private Date expireTime; //失效时间：72小时
+	
+	private int czhbLotteryId = 0; // 萃泽红包活动ID，为0标识为独立创建，非0为统一创建
 
 	public int getId() {
 		return id;
@@ -158,4 +160,14 @@ public class WxhbPreorder extends BasicEntity{
 	public void setExpireTime(Date expireTime) {
 		this.expireTime = expireTime;
 	}
+
+	public int getCzhbLotteryId() {
+		return czhbLotteryId;
+	}
+
+	public void setCzhbLotteryId(int czhbLotteryId) {
+		this.czhbLotteryId = czhbLotteryId;
+	}
+	
+	
 }

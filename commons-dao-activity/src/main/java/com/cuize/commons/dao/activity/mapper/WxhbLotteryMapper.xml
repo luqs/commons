@@ -15,6 +15,7 @@
 		<result property="lotteryId" column="lottery_id"/>
 		<result property="pageId" column="page_id"/>
 		<result property="result" column="result"/>
+		<result property="czhbLotteryId" column="czhb_lottery_id"/>
 		<result property="createTime" column="create_time"/>
 		<result property="updateTime" column="update_time"/>
 	</resultMap>
@@ -30,6 +31,7 @@
 			begin_time,
 			expire_time,
 			total,
+			czhb_lottery_id,
 			create_time
 		) values (
 			#{useTemplate},
@@ -40,6 +42,7 @@
 			#{beginTime},
 			#{expireTime},
 			#{total},
+			#{czhbLotteryId},
 			NOW()
 		)
 	</insert>
@@ -110,6 +113,7 @@
 			<if test="query.title != null and query.title !=''">
 				<![CDATA[ and title like CONCAT('%', #{query.title, jdbcType=VARCHAR} ,'%') ]]>
 			</if>	
+			order by id desc
 			limit #{page.start}, #{page.limit}
 	</select>
 	
@@ -131,6 +135,16 @@
 			</if>	
 	</select>
 	
+	<select id="queryWxhbLotteryByCzhbLotteryId" resultMap="wxhbLotteryResultMap">
+		select 
+			*
+		from 
+			wxhb_lottery
+		where
+			czhb_lottery_id = #{czhbLotteryId}
+			order by id desc
+			limit 1
+	</select>
 	
 	<resultMap id="wxhbLotteryTicketResultMap"
 		type="com.cuize.commons.dao.activity.domain.WxhbLotteryTicket">

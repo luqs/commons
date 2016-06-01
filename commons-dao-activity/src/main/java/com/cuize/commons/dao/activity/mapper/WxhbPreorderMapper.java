@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.cuize.commons.dao.activity.domain.WxhbPreorder;
 import com.cuize.commons.dao.activity.domain.WxhbPreorderTicket;
 import com.cuize.commons.dao.activity.queryvo.common.Page;
-import com.cuize.commons.dao.activity.queryvo.preorder.PreorderQueryVO;
+import com.cuize.commons.dao.activity.queryvo.preorder.WxPreorderQueryVO;
 
 /**
  * 微信红包预下单接口
@@ -36,14 +36,14 @@ public interface WxhbPreorderMapper {
 	 * @param query
 	 * @return
 	 */
-	public List<WxhbPreorder> queryWxhbPreorderByPage(@Param("page")Page page, @Param("query")PreorderQueryVO query);
+	public List<WxhbPreorder> queryWxhbPreorderByPage(@Param("page")Page page, @Param("query")WxPreorderQueryVO query);
 	
 	/**
 	 * 统计总数量
 	 * @param query
 	 * @return
 	 */
-	public int countWxhbPreorderByPage(@Param("query")PreorderQueryVO query);
+	public int countWxhbPreorderByPage(@Param("query")WxPreorderQueryVO query);
 
 	/**
 	 * 查询预下单详情
@@ -72,4 +72,11 @@ public interface WxhbPreorderMapper {
 	 * @return
 	 */
 	public WxhbPreorderTicket queryWxhbPreorderTicketByPreorderId(int preorderId);
+	
+	/**
+	 * 根据红包活动ID查询关联的ticket
+	 * @param czhbLotteryId
+	 * @return
+	 */
+	public List<String> queryWxhbPreorderTicketByCzhbLotteryId(int czhbLotteryId);
 }
