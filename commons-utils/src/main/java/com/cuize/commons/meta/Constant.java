@@ -41,4 +41,5 @@ public interface Constant {
 	
 	public static final Integer ORDER_REFUND_STATUS_CREATE = 0; //待退票新建
 	public static final Integer ORDER_REFUND_STATUS_FINISH = 1; //已退票已完成
+	public static final Integer ORDER_REFUND_STATUS_FAIL = 2; //退票失敗
 }
