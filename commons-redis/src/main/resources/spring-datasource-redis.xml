@@ -44,6 +44,7 @@
         </property>
 	</bean>
 
-	<context:property-placeholder location="classpath*:/conf/redis.properties" ignore-unresolvable="true" />
-	<!-- <util:properties id="redisProperties" location="file:/opt/conf/commons/redis.properties" ignore-resource-not-found="true"/> -->
+	<context:property-placeholder location="classpath*:/conf/redis.properties" ignore-unresolvable="true" properties-ref="redisProperties" local-override="true" />
+	<util:properties id="redisProperties" location="file:/opt/conf/commons/redis.properties" ignore-resource-not-found="true"/>
+	
 </beans>
