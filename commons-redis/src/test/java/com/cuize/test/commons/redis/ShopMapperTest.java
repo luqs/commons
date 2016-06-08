@@ -1,9 +1,6 @@
 package com.cuize.test.commons.redis;
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.cuize.commons.redis.RedisManager;
 
 /**
  * @author Ralph
@@ -14,7 +11,7 @@ public class ShopMapperTest extends DaoBaseAppTest{
 //	private static final Logger logger = LoggerFactory.getLogger(InsuranceOrderMapperTest.class);
 
 	 //@Autowired
-	 private RedisManager template;
+//	 private RedisManager template;
 	/*
 	@Test
 	public void selectByExample(){

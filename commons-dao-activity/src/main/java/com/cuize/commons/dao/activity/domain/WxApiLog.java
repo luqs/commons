@@ -1,7 +1,5 @@
 package com.cuize.commons.dao.activity.domain;
 
-import java.util.Date;
-
 /**
  * 微信接口调用记录
  * @author Administrator

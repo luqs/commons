@@ -8,7 +8,6 @@ import com.cuize.commons.dao.activity.domain.WxhbLottery;
 import com.cuize.commons.dao.activity.domain.WxhbLotteryTicket;
 import com.cuize.commons.dao.activity.queryvo.common.Page;
 import com.cuize.commons.dao.activity.queryvo.lottery.WxLotteryQueryVO;
-import com.cuize.commons.dao.activity.queryvo.preorder.WxPreorderQueryVO;
 import com.cuize.commons.dao.activity.resultvo.WxhbLotteryBindTicketVO;
 import com.cuize.commons.dao.activity.resultvo.WxhbLotteryUnbindTicketVO;
 
